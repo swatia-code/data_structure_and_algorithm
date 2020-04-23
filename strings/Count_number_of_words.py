@@ -24,8 +24,8 @@ LOGIC
 -----
 Iterate through the string and check if the chahracter is " " or '\'. If '\'is there check the next character and increment number of word count accordingly.
 
-CODE"""
-----
+CODE
+----"""
 
 test_cases = int(input())
 for i in range(test_cases):
