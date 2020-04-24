@@ -92,3 +92,4 @@ for i in range(t):
     s = input()
     non_repeating_char(s)
     print()
+
