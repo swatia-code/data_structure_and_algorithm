@@ -60,6 +60,7 @@ The first step to create a graph takes O(n+alpha) time where n is the number of 
 
 CODE
 ----
+"""
 def printOrder(alien_dict, n, k):
     alphabet = ''
     if n == 1:
@@ -158,4 +159,3 @@ if __name__ == '__main__':
 
 # } Driver Code Ends
 
-"""

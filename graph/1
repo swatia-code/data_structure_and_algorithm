@@ -60,6 +60,102 @@ The first step to create a graph takes O(n+alpha) time where n is the number of 
 
 CODE
 ----
-
-
 """
+def printOrder(alien_dict, n, k):
+    alphabet = ''
+    if n == 1:
+        for char in alien_dict[0]:
+            if not char in alphabet:
+                alphabet += char
+        return alphabet
+
+    adj_list = {}
+    vertex_incoming_degree = {}
+
+    for word in alien_dict:
+        for char in word:
+            if char not in vertex_incoming_degree:
+                vertex_incoming_degree[char] = 0
+
+    for i in range(0, n - 1):
+        curr_word = alien_dict[i]
+        next_word = alien_dict[i + 1]
+
+        for index in range(0, min(len(curr_word), len(next_word))):
+            char1 = curr_word[index]
+            char2 = next_word[index]
+
+            if char1 != char2:
+                if char1 not in adj_list:
+                    adj_list[char1] = set(char2)
+                else:
+                    adj_list[char1].add(char2)
+                break
+
+    for vertex in adj_list:
+        for neighbour in adj_list[vertex]:
+            if neighbour not in vertex_incoming_degree:
+                vertex_incoming_degree[neighbour] = 1
+            else:
+                vertex_incoming_degree[neighbour] += 1
+
+    visited_vertexes = []
+
+    for v in vertex_incoming_degree:
+        if vertex_incoming_degree[v] == 0:
+            visited_vertexes.append(v)
+
+    while visited_vertexes:
+        curr = visited_vertexes.pop(0)
+        alphabet += curr
+
+        if curr in adj_list:
+            for neighbour in adj_list[curr]:
+                vertex_incoming_degree[neighbour] -= 1
+
+                if vertex_incoming_degree[neighbour] == 0:
+                    visited_vertexes.append(neighbour)
+
+    return alphabet
+#{ 
+#  Driver Code Starts
+#Initial Template for Python 3
+
+class sort_by_order:
+    def __init__(self,s):
+        self.priority = {}
+        for i in range(len(s)):
+            self.priority[s[i]] = i
+    
+    def transform(self,word):
+        new_word = ''
+        for c in word:
+            new_word += chr( ord('a') + self.priority[c] )
+        return new_word
+    
+    def sort_this_list(self,lst):
+        lst.sort(key = self.transform)
+
+if __name__ == '__main__':
+    t=int(input())
+    for _ in range(t):
+        line=input().strip().split()
+        n=int(line[0])
+        k=int(line[1])
+        
+        alien_dict = [x for x in input().strip().split()]
+        duplicate_dict = alien_dict.copy()
+        
+        order = printOrder(alien_dict,n,k)
+        
+        x = sort_by_order(order)
+        x.sort_this_list(duplicate_dict)
+        
+        if duplicate_dict == alien_dict:
+            print(1)
+        else:
+            print(0)
+
+
+# } Driver Code Ends
+
