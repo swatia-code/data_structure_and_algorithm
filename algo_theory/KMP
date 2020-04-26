@@ -1,0 +1,18 @@
+Pattern searching is an important problem in computer science. When we do search a string in notepad/word file or browser or database, pattern searching algorithms are used to show the search results.
+
+KMP(Knuth Morris Pratt) Pattern Searching
+------------------------------------------
+The KMP matching algorithm uses degenerating propert(pattern having same sub-patterns appearing more than once in the pattern) of the pattern and improves the worst case complexity to O(n). The basic idea behind KMP's algorithm is: whenever we detect a mismatch(after some matches), we already know some of the characters in the text of the next window. We take advantage of this information to avaiod matching the characters that we know will anyway match.
+
+Example:
+Matching Overview
+txt = "AAAAABAAABA"
+pat = "AAAA"
+
+We compare first window of txt with pat and we find a match.
+In the next step, we compare next window of txt with pat.In this second window, we only compare fourth A of pattern with fourth character od current window of text to decide whether current window matches or not. Since we know first three character will anyway match, we skipped matching first three characters.
+
+--Need of preprocessing?
+An important question arises from the above explanation, how to know how many characters to be skipped. To know this, we pre-process pattern and prepare an integer array lps[] that tells us the count of characters to be skipped.
+
+
