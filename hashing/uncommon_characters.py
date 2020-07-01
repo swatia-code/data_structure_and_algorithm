@@ -14,6 +14,7 @@ Constraints:
 1 <= |S1|, |S2| <= 105
 
 Example:
+
 Input:
 1
 characters
