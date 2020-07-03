@@ -28,6 +28,19 @@ Testcase 1: The longest palindrome string present in the given string is "aabbaa
 
 LOGIC
 -----
+Solution 1:
+Maintain a boolean table[n][n] that is filled in bottom up manner.
+The value of table[i][j] is true, if the substring is palindrome, otherwise false.
+To calculate table[i][j], check the value of table[i+1][j-1], if the value is true and str[i] is same as str[j], then we make table[i][j] true.
+Otherwise, the value of table[i][j] is made false.
+
+Solution 2:
+The idea is to generate all even length and odd length palindromes and keep track of the longest palindrome seen so far.
+To generate odd length palindrome, Fix a centre and expand in both directions for longer palindromes, i.e. fix i (index) as center and two indices as i1 = i+1 and i2 = i-1
+Compare i1 and i2 if equal then decrease i2 and increase i1 and find the maximum length.
+Use a similar technique to find the even length palindrome.
+Take two indices i1 = i and i2 = i-1 and compare characters at i1 and i2 and find the maximum length till all pair of compared characters are equal and store the maximum length.
+Print the maximum length.
 
 SOURCE
 ------
