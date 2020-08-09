@@ -1,0 +1,140 @@
+'''
+PROBLEM STATEMENT
+-----------------
+Given a binary tree. Check whether it is a BST or not.
+
+Input Format:
+
+The values in the string are in the order of level order traversal of the tree where, numbers denote node values, and a character “N” denotes NULL child.
+
+For example:
+ 
+For the above tree, the string will be: 1 2 3 N N 4 6 N 5 N N 7 N
+
+Example 1:
+
+Input:
+S = 2 1 3
+Output: 1
+Explanation: The given Binary Tree is:
+    2
+ /    \ 
+1      3
+This is clearly a BST. Hence the output
+is 1.
+Example 2:
+
+Input:
+S = 2 N 7 N 6 N 5 N 9 N 2 N 6
+Output: 0
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function isBST() which takes the root of the tree as a parameter and returns true if the given binary tree is BST, else returns false.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the BST).
+
+Constraints:
+0 <= Number of edges <= 100000
+
+LOGIC
+-----
+The trick is to write a utility helper function isBSTUtil(struct node* node, int min, int max) that traverses down the tree keeping track of the narrowing min and max allowed values as it goes, looking at each node only once. The initial values for min and max should be INT_MIN and INT_MAX — they narrow from there.
+
+SOURCE
+------
+geeksforgeeks
+
+CODE
+----
+'''
+def is_BST_util(root, minimum, maximum):
+    if root is None:
+        return True
+        
+    if root.data < minimum or root.data > maximum:
+        return False
+        
+    return is_BST_util(root.left, minimum, root.data - 1) and is_BST_util(root.right, root.data + 1, maximum)
+
+# return True if the given tree is a BST, else return False
+def isBST(root):
+    #code here
+    minimum = float('-inf')
+    maximum = float('inf')
+    return is_BST_util(root, minimum, maximum)
+
+from collections import deque
+# Tree Node
+class Node:
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+
+# Function to Build Tree   
+def buildTree(s):
+    #Corner Case
+    if(len(s)==0 or s[0]=="N"):           
+        return None
+        
+    # Creating list of strings from input 
+    # string after spliting by space
+    ip=list(map(str,s.split()))
+    
+    # Create the root of the tree
+    root=Node(int(ip[0]))                     
+    size=0
+    q=deque()
+    
+    # Push the root to the queue
+    q.append(root)                            
+    size=size+1 
+    
+    # Starting from the second element
+    i=1                                       
+    while(size>0 and i<len(ip)):
+        # Get and remove the front of the queue
+        currNode=q[0]
+        q.popleft()
+        size=size-1
+        
+        # Get the current node's value from the string
+        currVal=ip[i]
+        
+        # If the left child is not null
+        if(currVal!="N"):
+            
+            # Create the left child for the current node
+            currNode.left=Node(int(currVal))
+            
+            # Push it to the queue
+            q.append(currNode.left)
+            size=size+1
+        # For the right child
+        i=i+1
+        if(i>=len(ip)):
+            break
+        currVal=ip[i]
+        
+        # If the right child is not null
+        if(currVal!="N"):
+            
+            # Create the right child for the current node
+            currNode.right=Node(int(currVal))
+            
+            # Push it to the queue
+            q.append(currNode.right)
+            size=size+1
+        i=i+1
+    return root
+    
+    
+if __name__=="__main__":
+    t=int(input())
+    for _ in range(0,t):
+        s=input()
+        root=buildTree(s)
+        if isBST(root):
+            print(1) 
+        else:
+            print(0)
