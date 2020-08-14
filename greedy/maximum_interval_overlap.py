@@ -3,8 +3,6 @@ PROBLEM STATEMENT
 -----------------
 Consider a big party where a log register for guest’s entry and exit times is maintained. Find the time at which there are maximum guests at the party. Note that entries in the register are not in any order.  if two events have the same time, then arrival is preferred over the exit.
 
-
-
 Input:
 The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. Each test case contains an integer n denoting the size of the entry and exit array. Then the next two lines contains the entry and exit array respectively.
 
