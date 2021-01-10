@@ -1,4 +1,4 @@
-# data_structure_and_algorithm
+#  Data Structures and Algorithm
 
-This contains a collection of data structure and algorithm problems that will help in deeper understanding of concepts.
+As an engineer, it is inevitable to enhance your problem solving skills irrespective of your experience. This repo contains a collection of data structure and algorithm problems that will help in deeper understanding of concepts.
 
