@@ -7,7 +7,6 @@ You are given weights and values of N items, put these items in a knapsack of ca
  Also given an integer W which represents knapsack capacity, find out the maximum value subset of val[] such that sum
  of the weights of this subset is smaller than or equal to W. You cannot break an item, either pick the complete item,
  or don’t pick it (0-1 property).
-
 Example 1:
 
 Input:
